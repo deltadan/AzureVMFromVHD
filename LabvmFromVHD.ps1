@@ -28,11 +28,11 @@ $sourceVhdUri = "https://631923westus2.blob.core.windows.net/vhd/ImageTest420180
  
 ### Defines the source Storage Account (Teacher's Account with VHD)
 $sourceStorageAccountName = "631923westus2"
-$sourceStorageKey = "tH5CLg39Hg2wZM0QCXQn6ekuqbBCTuZmlolIHrT33oT+jSHt16McK6Fxxx"
+$sourceStorageKey = "KEYHERE"
  
 ### Defines the target Storage Account (Student should create new account)
 $destStorageAccountName = "blstorageacct"
-$destStorageKey = "0NeMj5O2UhgWBblqGwqw22TtaimOZQgqot2zIzRA/Q4UGuNSKSeqNhbxxx"
+$destStorageKey = "KEYHERE"
  
 ### Create a context for the source storage account
 $sourceContext = New-AzureStorageContext  –StorageAccountName $sourceStorageAccountName `
