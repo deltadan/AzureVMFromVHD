@@ -71,7 +71,7 @@ Login-AzureRmAccount
 #Provide the name of your resource group where the LabVM will be created
 #This location should be same as the storage account where the instructors VHD file is stored
 $LabRG = New-AzureRmResourceGroup -Name LabRG -Location westus2
-
+$LabRG = Get-AzureRmResourceGroup -Name "n2yDev"
 #Create a VNET for the LabVM
 $vNet = New-AzureRmVirtualNetwork `
   -ResourceGroupName $LabRG.ResourceGroupName `
@@ -88,10 +88,10 @@ $vNet = New-AzureRmVirtualNetwork `
 
 #Provide the subscription Id where Managed Disks will be created
 #$subscriptionId = 'yourSubscriptionId'
-$subscriptionId = 'STUDENT-SUBSCRIPTION-ID-HERE'
+$subscriptionId = '30fc406c-c745-44f0-be2d-63b1c860cde0'
 
 #Provide the name of the Managed Disk
-$diskName = 'labvmosdisk'
+$diskName = 'n2yvmos.vhd'
 
 #Provide the size of the disks in GB. It should be greater than the VHD file size.
 $diskSize = '128'
@@ -101,11 +101,11 @@ $storageType = 'PremiumLRS'
 
 #Provide the Azure region (e.g. westus2) where Managed Disk will be located.
 #This location should be same as the resource group above and where the instructor VHD is located
-$location = 'westus2'
+$location = 'eastus'
 
 #Provide the URI of the VHD file (page blob) in a storage account. 
 #$sourceVHDURI = 'https://contosostorageaccount1.blob.core.windows.net/vhds/contosovhd123.vhd'
-$sourceVHDURI = 'https://STUDENT-STORAGEACCT-NAME-HERE.blob.core.windows.net/vhd/VHD-NAME-HERE.vhd'
+$sourceVHDURI = 'https://dantools.blob.core.windows.net/n2yvm/n2yvmos.vhd'
 
 #Set the context to the subscription Id where Managed Disk will be created
 Select-AzureRmSubscription -SubscriptionId $SubscriptionId
@@ -121,7 +121,7 @@ $virtualNetwork = Get-AzureRmVirtualNetwork -Name $vnet.Name -ResourceGroupName 
 $nic = New-AzureRmNetworkInterface -Name LabVMNIC -ResourceGroupName $LabRG.ResourceGroupName -Location $LabRG.Location -SubnetId $virtualnetwork.Subnets[0].Id -PublicIpAddressId $publicIp.Id
 
 #Initialize virtual machine configuration
-$virtualMachineName = "LabVM"
+$virtualMachineName = "N2YDEVVM"
 $virtualMachineSize = 'Standard_E2s_v3'
 $virtualMachine = New-AzureRmVMConfig -VMName $virtualMachineName -VMSize $virtualMachineSize
 $virtualMachine = Add-AzureRmVMNetworkInterface -VM $virtualMachine -Id $nic.Id
